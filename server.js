@@ -7,15 +7,15 @@ const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-// Static files serve করার জন্য
+// স্ট্যাটিক ফাইলগুলো সরাসরি মেইন ফোল্ডার বা public ফোল্ডার থেকে লোড করার ব্যবস্থা
+app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// সরাসরি মূল রুট থেকে index.html দেখানোর জন্য
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// রুম অনুযায়ী ক্লায়েন্টদের ট্র্যাক করার জন্য
+// রুম এবং ক্লায়েন্ট ট্র্যাক করার WebSocket লজিক
 const rooms = new Map();
 
 wss.on('connection', (ws) => {
@@ -47,14 +47,12 @@ wss.on('connection', (ws) => {
             roomClients.add(ws);
             ws.send(JSON.stringify({ type: 'joined', userid }));
 
-            // যদি রুমে অন্য কেউ থাকে, তাকে নতুন ইউজারের কথা জানানো
             roomClients.forEach(client => {
                 if (client !== ws) {
                     client.send(JSON.stringify({ type: 'peer-joined', userid }));
                 }
             });
         } else {
-            // সিগন্যালিং ডেটা (offer, answer, candidate) রিল এবং করা
             if (currentRoom && rooms.has(currentRoom)) {
                 rooms.get(currentRoom).forEach(client => {
                     if (client !== ws) {
