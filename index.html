@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,484 +10,418 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 :root {
-  --bg: #080b14;
-  --panel: rgba(17, 23, 40, .78);
-  --line: rgba(148, 163, 184, .14);
-  --muted: #929bb2;
-  --text: #f4f7ff;
-  --blue: #62a5ff;
-  --purple: #9c7bff;
-  --green: #5ce1b6;
+  --bg:#080b14;
+  --panel:rgba(17,23,40,.88);
+  --line:rgba(148,163,184,.14);
+  --muted:#929bb2;
+  --text:#f4f7ff;
+  --blue:#62a5ff;
+  --purple:#9c7bff;
+  --green:#5ce1b6;
 }
-
-* { box-sizing: border-box; }
-
+* { box-sizing:border-box; }
 body {
-  margin: 0;
-  min-height: 100vh;
-  color: var(--text);
-  font-family: Inter, sans-serif;
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  font-family:Inter,sans-serif;
   background:
-    radial-gradient(ellipse at 12% 0%, rgba(60, 91, 195, .20), transparent 42%),
-    radial-gradient(ellipse at 92% 28%, rgba(129, 66, 214, .15), transparent 36%),
+    radial-gradient(ellipse at 12% 0%,#3c5bc333,transparent 42%),
+    radial-gradient(ellipse at 92% 28%,#8142d626,transparent 36%),
     var(--bg);
 }
-
 body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: .16;
-  background-image: radial-gradient(#8291b5 .7px, transparent .7px);
-  background-size: 25px 25px;
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.16;
+  background-image:radial-gradient(#8291b5 .7px,transparent .7px);
+  background-size:25px 25px;
 }
-
-button, input { font: inherit; }
-button { cursor: pointer; }
-
-a { color: inherit; text-decoration: none; }
-
+button,input { font:inherit; }
+button { cursor:pointer; }
+a { color:inherit;text-decoration:none; }
 .shell {
-  position: relative;
-  z-index: 1;
-  width: min(1120px, calc(100% - 36px));
-  margin: auto;
+  position:relative;
+  z-index:1;
+  width:min(1120px,calc(100% - 36px));
+  margin:auto;
 }
-
 nav {
-  height: 82px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--line);
+  min-height:82px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  border-bottom:1px solid var(--line);
 }
-
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font: 700 22px "Space Grotesk", sans-serif;
-  letter-spacing: -.8px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font:700 22px "Space Grotesk",sans-serif;
+  letter-spacing:-.8px;
 }
-
-.brand-icon {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border-radius: 14px;
-  color: white;
-  background: linear-gradient(140deg, #64a9ff, #8060ff);
-  box-shadow: 0 5px 25px #6c73ff45;
+.brand span { color:#83aaff; }
+.custom-logo {
+  width:46px;
+  height:46px;
+  object-fit:cover;
+  border-radius:12px;
+  border:1px solid var(--line);
+  box-shadow:0 5px 25px #6c73ff45;
+  flex-shrink:0;
 }
-
-.brand-icon svg { width: 24px; height: 24px; }
-
-.brand span { color: #83aaff; }
-
 .nav-right {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  color: #b5bfd5;
-  font-size: 13px;
+  display:flex;
+  align-items:center;
+  gap:22px;
+  color:#b5bfd5;
+  font-size:13px;
 }
-
 .secure-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 13px;
-  border: 1px solid var(--line);
-  border-radius: 30px;
-  background: #ffffff05;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 13px;
+  border:1px solid var(--line);
+  border-radius:30px;
+  background:#ffffff05;
 }
-
 .dot {
-  width: 7px;
-  height: 7px;
-  background: var(--green);
-  border-radius: 50%;
-  box-shadow: 0 0 12px #5ce1b688;
+  width:7px;
+  height:7px;
+  display:inline-block;
+  background:var(--green);
+  border-radius:50%;
+  box-shadow:0 0 12px #5ce1b688;
+  flex-shrink:0;
 }
-
-.hero {
-  text-align: center;
-  padding: 67px 0 37px;
-}
-
+.hero { text-align:center;padding:67px 0 37px; }
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  border: 1px solid #879bff2c;
-  background: #758cff0c;
-  border-radius: 40px;
-  padding: 8px 13px;
-  font-size: 11px;
-  font-weight: 700;
-  color: #b8c7ff;
-  letter-spacing: 1.1px;
-  text-transform: uppercase;
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  border:1px solid #879bff2c;
+  background:#758cff0c;
+  border-radius:40px;
+  padding:8px 13px;
+  font-size:11px;
+  font-weight:700;
+  color:#b8c7ff;
+  letter-spacing:1.1px;
 }
-
 .hero h1 {
-  margin: 24px 0 15px;
-  font: 700 clamp(38px, 6vw, 65px)/1.08 "Space Grotesk", sans-serif;
-  letter-spacing: -2.7px;
+  margin:24px 0 15px;
+  font:700 clamp(38px,6vw,65px)/1.08 "Space Grotesk",sans-serif;
+  letter-spacing:-2.7px;
 }
-
 .gradient {
-  color: transparent;
-  background: linear-gradient(100deg, #8ec5ff, #a58bff 60%, #e2a6ff);
-  background-clip: text;
-  -webkit-background-clip: text;
+  color:transparent;
+  background:linear-gradient(100deg,#8ec5ff,#a58bff 60%,#e2a6ff);
+  background-clip:text;
+  -webkit-background-clip:text;
 }
-
 .hero p {
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.9;
-  max-width: 540px;
-  margin: auto;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.9;
+  max-width:540px;
+  margin:auto;
 }
-
 .app-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(265px, .8fr);
-  gap: 20px;
-  align-items: stretch;
+  display:grid;
+  grid-template-columns:minmax(0,1.55fr) minmax(265px,.8fr);
+  gap:20px;
+  align-items:stretch;
 }
-
 .panel {
-  min-width: 0;
-  border: 1px solid var(--line);
-  background: linear-gradient(145deg, #151c2dce, #0e1422e8);
-  border-radius: 23px;
-  padding: 25px;
-  box-shadow: 0 22px 70px #00000025;
-  backdrop-filter: blur(20px);
+  min-width:0;
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,#151c2dce,#0e1422e8);
+  border-radius:23px;
+  padding:25px;
+  box-shadow:0 22px 70px #00000025;
+  backdrop-filter:blur(20px);
 }
-
 .panel-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 23px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:23px;
 }
-
 .panel h2 {
-  font: 600 19px "Space Grotesk", sans-serif;
-  margin: 0 0 7px;
+  font:600 19px "Space Grotesk",sans-serif;
+  margin:0 0 7px;
 }
-
 .sub {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.7;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
 }
-
 .step {
-  color: #a9bbff;
-  background: #8795ff12;
-  border: 1px solid #8795ff25;
-  padding: 7px 10px;
-  border-radius: 9px;
-  font-size: 11px;
-  white-space: nowrap;
+  color:#a9bbff;
+  background:#8795ff12;
+  border:1px solid #8795ff25;
+  padding:7px 10px;
+  border-radius:9px;
+  font-size:11px;
+  white-space:nowrap;
 }
-
-.room-row {
-  display: flex;
-  gap: 10px;
-}
-
+.room-row { display:flex;gap:10px; }
 input {
-  width: 100%;
-  min-width: 0;
-  border: 1px solid #8495b31f;
-  border-radius: 12px;
-  padding: 14px 15px;
-  outline: none;
-  color: white;
-  background: #080d19a8;
-  transition: border .2s, box-shadow .2s;
+  width:100%;
+  min-width:0;
+  border:1px solid #8495b31f;
+  border-radius:12px;
+  padding:14px 15px;
+  outline:none;
+  color:white;
+  background:#080d19a8;
 }
-
 input:focus {
-  border-color: #7b8cff9c;
-  box-shadow: 0 0 0 3px #7b8cff15;
+  border-color:#7b8cff9c;
+  box-shadow:0 0 0 3px #7b8cff15;
 }
-
-input::placeholder { color: #66728a; }
-
+input::placeholder { color:#66728a; }
 .btn {
-  border: 0;
-  border-radius: 12px;
-  padding: 13px 18px;
-  font-weight: 700;
-  font-size: 13px;
-  transition: transform .2s, filter .2s;
+  border:0;
+  border-radius:12px;
+  padding:13px 18px;
+  font-weight:700;
+  font-size:13px;
+  transition:transform .2s,filter .2s;
 }
-
-.btn:hover { filter: brightness(1.12); transform: translateY(-1px); }
-.btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
-
+.btn:hover { filter:brightness(1.12);transform:translateY(-1px); }
+.btn:disabled { opacity:.45;cursor:not-allowed;transform:none; }
 .btn-primary {
-  color: white;
-  background: linear-gradient(110deg, #518dff, #8263f6);
-  box-shadow: 0 6px 22px #685fff30;
+  color:white;
+  background:linear-gradient(110deg,#518dff,#8263f6);
+  box-shadow:0 6px 22px #685fff30;
 }
-
 .btn-secondary {
-  color: #dce5ff;
-  border: 1px solid var(--line);
-  background: #ffffff07;
+  color:#dce5ff;
+  border:1px solid var(--line);
+  background:#ffffff07;
 }
-
-.room-row .btn { white-space: nowrap; }
-
+.room-row .btn { white-space:nowrap; }
 .connection {
-  margin-top: 13px;
-  display: flex;
-  gap: 9px;
-  align-items: center;
-  color: var(--muted);
-  font-size: 12px;
+  margin-top:13px;
+  display:flex;
+  gap:9px;
+  align-items:center;
+  color:var(--muted);
+  font-size:12px;
 }
-
-.connection .dot { background: #77839c; box-shadow: none; flex-shrink: 0; }
-.connection.online .dot { background: var(--green); box-shadow: 0 0 12px #5ce1b688; }
-
-.separator {
-  height: 1px;
-  background: var(--line);
-  margin: 24px 0;
+.connection .dot { background:#77839c;box-shadow:none; }
+.connection.online .dot {
+  background:var(--green);
+  box-shadow:0 0 12px #5ce1b688;
 }
-
+.separator { height:1px;background:var(--line);margin:24px 0; }
 .dropzone {
-  position: relative;
-  min-height: 232px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 25px 18px;
-  border: 1.5px dashed #8296c64d;
-  border-radius: 17px;
-  background:
-    radial-gradient(ellipse at center, #6c80ff0c, transparent 70%),
-    #070c173d;
-  transition: .25s;
-  cursor: pointer;
+  min-height:232px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:25px 18px;
+  border:1.5px dashed #8296c64d;
+  border-radius:17px;
+  background:radial-gradient(ellipse at center,#6c80ff0c,transparent 70%),#070c173d;
+  transition:.25s;
+  cursor:pointer;
 }
-
-.dropzone:hover, .dropzone.dragover {
-  border-color: #8e9bff;
-  background-color: #8a82ff0e;
+.dropzone:hover,.dropzone.dragover {
+  border-color:#8e9bff;
+  background-color:#8a82ff0e;
 }
-
 .upload-icon {
-  width: 62px;
-  height: 62px;
-  display: grid;
-  place-items: center;
-  border: 1px solid #8ea7ff32;
-  background: linear-gradient(145deg, #608bff20, #9c70ff18);
-  color: #a9c5ff;
-  border-radius: 19px;
-  margin-bottom: 17px;
+  width:62px;height:62px;
+  display:grid;place-items:center;
+  border:1px solid #8ea7ff32;
+  background:linear-gradient(145deg,#608bff20,#9c70ff18);
+  color:#a9c5ff;
+  border-radius:19px;
+  margin-bottom:17px;
 }
-
-.upload-icon svg { width: 29px; height: 29px; }
-
-.dropzone h3 {
-  font-size: 15px;
-  margin: 0 0 9px;
-}
-
+.upload-icon svg { width:29px;height:29px; }
+.dropzone h3 { font-size:15px;margin:0 0 9px; }
 .dropzone p {
-  color: var(--muted);
-  font-size: 12px;
-  margin: 0;
-  line-height: 1.8;
+  color:var(--muted);
+  font-size:12px;
+  margin:0;
+  line-height:1.8;
 }
-
-.browse { color: #a5b9ff; font-weight: 700; }
-#file-input { display: none; }
-
+.browse { color:#a5b9ff;font-weight:700; }
+#file-input { display:none; }
 .file-card {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  padding: 14px;
-  border: 1px solid var(--line);
-  background: #ffffff05;
-  border-radius: 13px;
-  margin-top: 15px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:14px;
+  border:1px solid var(--line);
+  background:#ffffff05;
+  border-radius:13px;
+  margin-top:15px;
 }
-
 .file-icon {
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  background: #688cff16;
-  color: #9bbaff;
-  border-radius: 12px;
-  font-size: 19px;
+  flex-shrink:0;
+  display:grid;place-items:center;
+  width:42px;height:42px;
+  background:#688cff16;
+  color:#9bbaff;
+  border-radius:12px;
+  font-size:19px;
 }
-
-.file-meta { flex: 1; min-width: 0; }
-.file-name { font-size: 12px; font-weight: 700; overflow-wrap: anywhere; }
-.file-size { color: var(--muted); font-size: 11px; margin-top: 5px; }
-
+.file-meta { flex:1;min-width:0; }
+.file-name { font-size:12px;font-weight:700;overflow-wrap:anywhere; }
+.file-size { color:var(--muted);font-size:11px;margin-top:5px; }
 .progress-track {
-  height: 6px;
-  overflow: hidden;
-  background: #ffffff10;
-  border-radius: 20px;
-  margin-top: 13px;
+  height:6px;
+  overflow:hidden;
+  background:#ffffff10;
+  border-radius:20px;
+  margin-top:13px;
 }
-
 .progress-fill {
-  width: 0;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #5c9cff, #b18aff);
-  transition: width .12s;
+  width:0;height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg,#5c9cff,#b18aff);
+  transition:width .12s;
 }
-
 .progress-label {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  color: var(--muted);
-  font-size: 11px;
-  margin-top: 8px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:8px;
 }
-
-.side-panel { display: flex; flex-direction: column; }
-
+.side-panel { display:flex;flex-direction:column; }
 .connection-visual {
-  min-height: 170px;
-  border: 1px solid var(--line);
-  border-radius: 17px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 19px;
-  background: radial-gradient(ellipse, #7d75ff12, transparent 72%);
-  margin-bottom: 23px;
+  min-height:170px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:19px;
+  background:radial-gradient(ellipse,#7d75ff12,transparent 72%);
+  margin-bottom:23px;
 }
-
 .device {
-  width: 58px;
-  height: 74px;
-  display: grid;
-  place-items: center;
-  border-radius: 14px;
-  border: 1px solid #839dff50;
-  background: linear-gradient(145deg, #6c9bff24, #8b72ff0e);
-  color: #a9c5ff;
+  width:58px;height:74px;
+  display:grid;place-items:center;
+  border-radius:14px;
+  border:1px solid #839dff50;
+  background:linear-gradient(145deg,#6c9bff24,#8b72ff0e);
+  color:#a9c5ff;
 }
-
-.device svg { width: 27px; height: 27px; }
-
+.device svg { width:27px;height:27px; }
 .link-line {
-  width: 45px;
-  height: 2px;
-  background: linear-gradient(90deg, #6da9ff, #a58aff);
-  position: relative;
+  width:45px;height:2px;
+  background:linear-gradient(90deg,#6da9ff,#a58aff);
+  position:relative;
 }
-
 .link-line::after {
-  content: "";
-  position: absolute;
-  right: -1px;
-  top: -3px;
-  border-left: 6px solid #a58aff;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
+  content:"";
+  position:absolute;
+  right:-1px;top:-3px;
+  border-left:6px solid #a58aff;
+  border-top:4px solid transparent;
+  border-bottom:4px solid transparent;
 }
-
 .feature {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin: 19px 0;
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  margin:19px 0;
 }
-
 .feature-icon {
-  display: grid;
-  place-items: center;
-  width: 35px;
-  height: 35px;
-  border: 1px solid var(--line);
-  border-radius: 11px;
-  background: #ffffff05;
-  color: #9db6ff;
-  flex-shrink: 0;
+  display:grid;place-items:center;
+  width:35px;height:35px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:#ffffff05;
+  color:#9db6ff;
+  flex-shrink:0;
 }
-
-.feature-icon svg { width: 17px; height: 17px; }
-
-.feature strong { display: block; font-size: 12px; margin: 2px 0 6px; }
-.feature p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.8; }
-
+.feature strong { display:block;font-size:12px;margin:2px 0 6px; }
+.feature p { margin:0;color:var(--muted);font-size:11px;line-height:1.8; }
 .tip {
-  margin-top: auto;
-  padding: 14px;
-  border: 1px solid #78a5ff20;
-  background: #6898ff08;
-  border-radius: 13px;
-  color: #aebcdb;
-  font-size: 11px;
-  line-height: 1.9;
+  margin-top:auto;
+  padding:14px;
+  border:1px solid #78a5ff20;
+  background:#6898ff08;
+  border-radius:13px;
+  color:#aebcdb;
+  font-size:11px;
+  line-height:1.9;
 }
-
-.tip strong { color: #c7d5ff; }
+.tip strong { color:#c7d5ff; }
+.hidden { display:none!important; }
 
 footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  padding: 28px 0 32px;
-  color: #68748d;
-  font-size: 11px;
+  padding:28px 0 25px;
+  color:#68748d;
+  font-size:11px;
+  text-align:center;
 }
-
-footer span { color: #a5b6d4; }
-
-.hidden { display: none !important; }
-
-@media (max-width: 760px) {
-  .shell { width: min(100% - 24px, 520px); }
-  nav { height: 70px; }
-  .brand { font-size: 19px; }
-  .brand-icon { width: 38px; height: 38px; }
-  .nav-right { gap: 0; }
-  .nav-right .nav-link { display: none; }
-  .secure-label { padding: 9px 10px; font-size: 10px; }
-  .hero { padding: 49px 0 30px; }
-  .hero h1 { letter-spacing: -1.7px; }
-  .hero p { font-size: 13px; }
-  .app-grid { grid-template-columns: 1fr; }
-  .panel { padding: 19px; border-radius: 19px; }
-  .side-panel { min-height: 0; }
-  .connection-visual { min-height: 140px; }
-  footer { flex-direction: column; text-align: center; }
+.footer-main {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
 }
+.footer-main span { color:#a5b6d4; }
+.developer-credit {
+  width:100%;
+  margin-top:22px;
+  padding:20px 0 8px;
+  border-top:1px solid var(--line);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:9px;
+}
+.developer-label {
+  color:#8290aa;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:2px;
+}
+.developer-credit a {
+  color:#a58bff;
+  font-size:14px;
+  font-weight:700;
+  transition:color .2s;
+}
+.developer-credit a:hover { color:#8ec5ff; }
 
-@media (max-width: 390px) {
-  .room-row { flex-direction: column; }
-  .room-row .btn { width: 100%; }
-  .panel-heading { flex-wrap: wrap; }
+@media(max-width:760px) {
+  .shell { width:min(calc(100% - 24px),520px); }
+  nav { min-height:70px; }
+  .brand { font-size:19px; }
+  .custom-logo { width:40px;height:40px; }
+  .nav-right { gap:0; }
+  .nav-right .nav-link { display:none; }
+  .secure-label { padding:9px 10px;font-size:10px; }
+  .hero { padding:49px 0 30px; }
+  .hero h1 { letter-spacing:-1.7px; }
+  .hero p { font-size:13px; }
+  .app-grid { grid-template-columns:1fr; }
+  .panel { padding:19px;border-radius:19px; }
+  .connection-visual { min-height:140px; }
+  .footer-main { flex-direction:column;text-align:center; }
+}
+@media(max-width:390px) {
+  .room-row { flex-direction:column; }
+  .room-row .btn { width:100%; }
+  .panel-heading { flex-wrap:wrap; }
 }
 </style>
 </head>
@@ -496,171 +429,177 @@ footer span { color: #a5b6d4; }
 <body>
 <div class="shell">
 
-  <nav>
-    <a href="#" class="brand" aria-label="AirDrop Pro home">
-      <div class="brand-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 16V4m-5 5 5-5 5 5"/>
-          <path d="M5 13v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/>
-        </svg>
-      </div>
-      AirDrop <span>Pro</span>
-    </a>
+<nav>
+  <a href="#" class="brand" aria-label="AirDrop Pro home">
+    <img
+      src="https://i.ibb.co.com/NgQYM55Z/20261027-005010.jpg"
+      alt="AirDrop Pro Logo"
+      class="custom-logo"
+    >
+    <div>AirDrop <span>Pro</span></div>
+  </a>
 
-    <div class="nav-right">
-      <span class="nav-link">Fast. Private. Simple.</span>
-      <div class="secure-label">
-        <span class="dot"></span>
-        WebRTC Transfer
-      </div>
-    </div>
-  </nav>
-
-  <header class="hero">
-    <div class="eyebrow">
+  <div class="nav-right">
+    <span class="nav-link">Fast. Private. Simple.</span>
+    <div class="secure-label">
       <span class="dot"></span>
-      NEXT-GEN FILE SHARING
+      WebRTC Transfer
     </div>
+  </div>
+</nav>
 
-    <h1>Files move.<br><span class="gradient">Limits don't.</span></h1>
+<header class="hero">
+  <div class="eyebrow">
+    <span class="dot"></span>
+    NEXT-GEN FILE SHARING
+  </div>
+  <h1>Files move.<br><span class="gradient">Limits don't.</span></h1>
+  <p>
+    Share files between devices with a simple room code.
+    No complicated setup. Just connect, select, and send.
+  </p>
+</header>
 
-    <p>
-      Share files between devices with a simple room code.
-      No complicated setup. Just connect, select, and send.
-    </p>
-  </header>
+<main class="app-grid">
 
-  <main class="app-grid">
+<section class="panel">
+  <div class="panel-heading">
+    <div>
+      <h2>File Transfer</h2>
+      <div class="sub">Connect your devices and start sharing.</div>
+    </div>
+    <div class="step">01 / CONNECT</div>
+  </div>
 
-    <section class="panel">
-      <div class="panel-heading">
-        <div>
-          <h2>File Transfer</h2>
-          <div class="sub">Connect your devices and start sharing.</div>
-        </div>
-        <div class="step">01 / CONNECT</div>
+  <div class="room-row">
+    <input id="room-input" type="text" maxlength="64"
+      placeholder="Enter your room code" autocomplete="off"
+      aria-label="Room code">
+    <button class="btn btn-primary" id="connect-btn">Connect Room ↗</button>
+  </div>
+
+  <div class="connection" id="connection">
+    <span class="dot"></span>
+    <span id="connection-status">Waiting for room code</span>
+  </div>
+
+  <div class="separator"></div>
+
+  <div class="panel-heading">
+    <div>
+      <h2>Send a file</h2>
+      <div class="sub">Choose a file or drop it into the area below.</div>
+    </div>
+    <div class="step">02 / SHARE</div>
+  </div>
+
+  <div class="dropzone" id="drop-zone" role="button" tabindex="0"
+       aria-label="Choose or drop a file">
+    <div class="upload-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 16V4m-5 5 5-5 5 5"/>
+        <path d="M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/>
+      </svg>
+    </div>
+    <h3>Drop your files here</h3>
+    <p>Drag &amp; drop or <span class="browse">browse files</span></p>
+    <p style="margin-top:8px">Your device's file picker will open</p>
+  </div>
+
+  <input type="file" id="file-input">
+
+  <div id="transfer-card" class="file-card hidden">
+    <div class="file-icon">↗</div>
+    <div class="file-meta">
+      <div class="file-name" id="file-name">filename.zip</div>
+      <div class="file-size" id="file-size">0 MB</div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
       </div>
-
-      <div class="room-row">
-        <input id="room-input" type="text" maxlength="64"
-          placeholder="Enter your room code" autocomplete="off"
-          aria-label="Room code">
-        <button class="btn btn-primary" id="connect-btn">Connect Room ↗</button>
+      <div class="progress-label">
+        <span id="transfer-status">Preparing transfer...</span>
+        <span id="progress-percent">0%</span>
       </div>
+    </div>
+  </div>
 
-      <div class="connection" id="connection">
-        <span class="dot"></span>
-        <span id="connection-status">Waiting for room code</span>
-      </div>
+  <div id="receive-list" class="hidden"></div>
+</section>
 
-      <div class="separator"></div>
+<aside class="panel side-panel">
+  <div class="panel-heading">
+    <div>
+      <h2>Your devices</h2>
+      <div class="sub">A direct connection between peers.</div>
+    </div>
+  </div>
 
-      <div class="panel-heading">
-        <div>
-          <h2>Send a file</h2>
-          <div class="sub">Choose a file or drop it into the area below.</div>
-        </div>
-        <div class="step">02 / SHARE</div>
-      </div>
+  <div class="connection-visual">
+    <div class="device">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.7" stroke-linecap="round">
+        <rect x="5" y="2" width="14" height="20" rx="2.5"/>
+        <path d="M10 18h4"/>
+      </svg>
+    </div>
+    <div class="link-line"></div>
+    <div class="device">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.7" stroke-linecap="round">
+        <rect x="2" y="4" width="20" height="14" rx="2"/>
+        <path d="M8 22h8m-4-4v4"/>
+      </svg>
+    </div>
+  </div>
 
-      <div class="dropzone" id="drop-zone" role="button" tabindex="0"
-           aria-label="Choose or drop a file">
-        <div class="upload-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 16V4m-5 5 5-5 5 5"/>
-            <path d="M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/>
-          </svg>
-        </div>
-        <h3>Drop your files here</h3>
-        <p>Drag &amp; drop or <span class="browse">browse files</span></p>
-        <p style="margin-top:8px">Your device's file picker will open</p>
-      </div>
+  <div class="feature">
+    <div class="feature-icon">↗</div>
+    <div>
+      <strong>Direct peer connection</strong>
+      <p>WebRTC can transfer data directly between connected browsers.</p>
+    </div>
+  </div>
 
-      <input type="file" id="file-input">
+  <div class="feature">
+    <div class="feature-icon">◇</div>
+    <div>
+      <strong>Simple room codes</strong>
+      <p>Join the same room from your sending and receiving devices.</p>
+    </div>
+  </div>
 
-      <div id="transfer-card" class="file-card hidden">
-        <div class="file-icon" id="file-icon">↗</div>
-        <div class="file-meta">
-          <div class="file-name" id="file-name">filename.zip</div>
-          <div class="file-size" id="file-size">0 MB</div>
-          <div class="progress-track">
-            <div class="progress-fill" id="progress-fill"></div>
-          </div>
-          <div class="progress-label">
-            <span id="transfer-status">Preparing transfer...</span>
-            <span id="progress-percent">0%</span>
-          </div>
-        </div>
-      </div>
+  <div class="feature">
+    <div class="feature-icon">⇧</div>
+    <div>
+      <strong>Easy file sharing</strong>
+      <p>Send a file and download it on the receiving device.</p>
+    </div>
+  </div>
 
-      <div id="receive-list" class="hidden"></div>
-    </section>
+  <div class="tip">
+    <strong>Quick tip</strong><br>
+    Open AirDrop Pro on both devices and enter the same room code.
+    Keep the connection active until the transfer finishes.
+  </div>
+</aside>
 
-    <aside class="panel side-panel">
-      <div class="panel-heading">
-        <div>
-          <h2>Your devices</h2>
-          <div class="sub">A direct connection between peers.</div>
-        </div>
-      </div>
+</main>
 
-      <div class="connection-visual">
-        <div class="device">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="1.7" stroke-linecap="round">
-            <rect x="5" y="2" width="14" height="20" rx="2.5"/>
-            <path d="M10 18h4"/>
-          </svg>
-        </div>
-        <div class="link-line"></div>
-        <div class="device">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="1.7" stroke-linecap="round">
-            <rect x="2" y="4" width="20" height="14" rx="2"/>
-            <path d="M8 22h8m-4-4v4"/>
-          </svg>
-        </div>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">↗</div>
-        <div>
-          <strong>Direct peer connection</strong>
-          <p>WebRTC can transfer data directly between connected browsers.</p>
-        </div>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">◇</div>
-        <div>
-          <strong>Simple room codes</strong>
-          <p>Join the same room from your sending and receiving devices.</p>
-        </div>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">⇧</div>
-        <div>
-          <strong>Easy file sharing</strong>
-          <p>Send a file and download it on the receiving device.</p>
-        </div>
-      </div>
-
-      <div class="tip">
-        <strong>Quick tip</strong><br>
-        Open AirDrop Pro on both devices and enter the same room code.
-        Keep the connection active until the transfer finishes.
-      </div>
-    </aside>
-
-  </main>
-
-  <footer>
+<footer>
+  <div class="footer-main">
     <div>© 2026 <span>AirDrop Pro</span>. Built for seamless sharing.</div>
     <div>Modern sharing experience · WebRTC</div>
-  </footer>
+  </div>
+
+  <div class="developer-credit">
+    <span class="developer-label">DEVELOPER</span>
+    <a href="https://t.me/desingwithantony"
+       target="_blank"
+       rel="noopener noreferrer">@desingwithantony</a>
+  </div>
+</footer>
+
 </div>
 
 <script>
@@ -689,8 +628,11 @@ let incomingBytes = 0;
 let transferBusy = false;
 
 const CHUNK_SIZE = 16 * 1024;
+
 const rtcConfig = {
-  iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+  iceServers: [
+    { urls: 'stun:stun.l.google.com:19302' }
+  ]
 };
 
 function setStatus(message, online = false) {
@@ -700,13 +642,18 @@ function setStatus(message, online = false) {
 
 function formatBytes(bytes) {
   if (bytes < 1024) return bytes + ' B';
-  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-  if (bytes < 1024 * 1024 * 1024) return (bytes / 1024 / 1024).toFixed(2) + ' MB';
+  if (bytes < 1024 * 1024)
+    return (bytes / 1024).toFixed(1) + ' KB';
+  if (bytes < 1024 * 1024 * 1024)
+    return (bytes / 1024 / 1024).toFixed(2) + ' MB';
   return (bytes / 1024 / 1024 / 1024).toFixed(2) + ' GB';
 }
 
 function updateProgress(bytes, total, label) {
-  const percent = total ? Math.min(100, Math.round(bytes / total * 100)) : 0;
+  const percent = total
+    ? Math.min(100, Math.round(bytes / total * 100))
+    : 100;
+
   progressFill.style.width = percent + '%';
   progressPercent.textContent = percent + '%';
   transferStatus.textContent = label;
@@ -737,15 +684,21 @@ function connectRoom() {
     return;
   }
 
-  // Configure this URL to match your deployed signaling server.
-  const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-  const wsUrl = wsProtocol + '//' + location.host;
+  /*
+    IMPORTANT:
+    Set SIGNALING_SERVER to your deployed WebSocket server URL.
+    Example: wss://your-signaling-server.example.com
+    The server must implement the signaling protocol used below.
+  */
+  const SIGNALING_SERVER = location.protocol === 'https:'
+    ? 'wss://' + location.host
+    : 'ws://' + location.host;
 
   connectBtn.disabled = true;
   setStatus('Connecting to signaling server...');
 
   try {
-    ws = new WebSocket(wsUrl);
+    ws = new WebSocket(SIGNALING_SERVER);
   } catch (error) {
     connectBtn.disabled = false;
     setStatus('Could not create signaling connection.');
@@ -784,7 +737,11 @@ function connectRoom() {
 
           const answer = await pc.createAnswer();
           await pc.setLocalDescription(answer);
-          sendSignal({ type: 'answer', answer: pc.localDescription });
+
+          sendSignal({
+            type: 'answer',
+            answer: pc.localDescription
+          });
           break;
 
         case 'answer':
@@ -815,6 +772,7 @@ function connectRoom() {
   ws.onclose = () => {
     connectBtn.disabled = false;
     setStatus('Signaling connection closed.');
+
     if (dataChannel && dataChannel.readyState === 'open') {
       dataChannel.close();
     }
@@ -825,12 +783,15 @@ function sendSignal(payload) {
   if (!ws || ws.readyState !== WebSocket.OPEN) {
     throw new Error('Signaling server is not connected.');
   }
+
   ws.send(JSON.stringify({ ...payload, room: roomCode }));
 }
 
 async function flushCandidates() {
   if (!pc || !pc.remoteDescription) return;
+
   const candidates = pendingCandidates.splice(0);
+
   for (const candidate of candidates) {
     await pc.addIceCandidate(candidate);
   }
@@ -842,19 +803,26 @@ async function initPeerConnection(isInitiator) {
     pc = null;
   }
 
+  pendingCandidates = [];
   pc = new RTCPeerConnection(rtcConfig);
 
   pc.onicecandidate = event => {
     if (event.candidate) {
-      sendSignal({ type: 'candidate', candidate: event.candidate });
+      sendSignal({
+        type: 'candidate',
+        candidate: event.candidate
+      });
     }
   };
 
   pc.onconnectionstatechange = () => {
     if (!pc) return;
+
     if (pc.connectionState === 'connected') {
       setStatus('Peer connected. Ready to transfer files!', true);
-    } else if (['failed', 'disconnected', 'closed'].includes(pc.connectionState)) {
+    } else if (
+      ['failed', 'disconnected', 'closed'].includes(pc.connectionState)
+    ) {
       setStatus('Peer connection ' + pc.connectionState + '.');
     }
   };
@@ -865,7 +833,11 @@ async function initPeerConnection(isInitiator) {
 
     const offer = await pc.createOffer();
     await pc.setLocalDescription(offer);
-    sendSignal({ type: 'offer', offer: pc.localDescription });
+
+    sendSignal({
+      type: 'offer',
+      offer: pc.localDescription
+    });
   } else {
     pc.ondatachannel = event => {
       dataChannel = event.channel;
@@ -905,8 +877,24 @@ function waitForBuffer(channel) {
     return Promise.resolve();
   }
 
-  return new Promise(resolve => {
-    channel.addEventListener('bufferedamountlow', resolve, { once: true });
+  return new Promise((resolve, reject) => {
+    const onLow = () => {
+      cleanup();
+      resolve();
+    };
+
+    const onClose = () => {
+      cleanup();
+      reject(new Error('Connection closed during transfer.'));
+    };
+
+    function cleanup() {
+      channel.removeEventListener('bufferedamountlow', onLow);
+      channel.removeEventListener('close', onClose);
+    }
+
+    channel.addEventListener('bufferedamountlow', onLow);
+    channel.addEventListener('close', onClose);
   });
 }
 
@@ -923,9 +911,9 @@ async function sendFile(file) {
 
   transferBusy = true;
   dropZone.style.pointerEvents = 'none';
+  fileInput.disabled = true;
 
   showFileCard(file.name, file.size, 'Preparing file...');
-  fileInput.disabled = true;
 
   try {
     dataChannel.send(JSON.stringify({
@@ -944,7 +932,10 @@ async function sendFile(file) {
 
       await waitForBuffer(dataChannel);
 
-      const chunk = await file.slice(offset, offset + CHUNK_SIZE).arrayBuffer();
+      const chunk = await file
+        .slice(offset, offset + CHUNK_SIZE)
+        .arrayBuffer();
+
       dataChannel.send(chunk);
       offset += chunk.byteLength;
 
@@ -990,6 +981,7 @@ function handleIncomingData(event) {
 
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
+
       link.href = url;
       link.download = incomingFile.name;
       link.className = 'btn btn-secondary';
@@ -1000,6 +992,7 @@ function handleIncomingData(event) {
 
       const item = document.createElement('div');
       item.className = 'file-card';
+
       const meta = document.createElement('div');
       meta.className = 'file-meta';
 
@@ -1028,10 +1021,12 @@ function handleIncomingData(event) {
   if (incomingFile && event.data instanceof ArrayBuffer) {
     incomingChunks.push(event.data);
     incomingBytes += event.data.byteLength;
+
     updateProgress(incomingBytes, incomingFile.size, 'Receiving file...');
   } else if (incomingFile && event.data instanceof Blob) {
     incomingChunks.push(event.data);
     incomingBytes += event.data.size;
+
     updateProgress(incomingBytes, incomingFile.size, 'Receiving file...');
   }
 }
@@ -1047,7 +1042,9 @@ dropZone.addEventListener('keydown', event => {
 
 fileInput.addEventListener('change', () => {
   const file = fileInput.files && fileInput.files[0];
+
   if (file) sendFile(file);
+
   fileInput.value = '';
 });
 
@@ -1065,6 +1062,7 @@ dropZone.addEventListener('drop', event => {
   dropZone.classList.remove('dragover');
 
   const file = event.dataTransfer.files[0];
+
   if (file) sendFile(file);
 });
 </script>
