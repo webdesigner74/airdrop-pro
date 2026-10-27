@@ -631,7 +631,10 @@ const CHUNK_SIZE = 16 * 1024;
 
 const rtcConfig = {
   iceServers: [
-    { urls: 'stun:stun.l.google.com:19302' }
+    { urls: 'stun:stun.l.google.com:19302' },
+    { urls: 'stun:stun1.l.google.com:19302' },
+    { urls: 'stun:stun2.l.google.com:19302' },
+    { urls: 'stun:stun.services.mozilla.com' }
   ]
 };
 
@@ -684,12 +687,6 @@ function connectRoom() {
     return;
   }
 
-  /*
-    IMPORTANT:
-    Set SIGNALING_SERVER to your deployed WebSocket server URL.
-    Example: wss://your-signaling-server.example.com
-    The server must implement the signaling protocol used below.
-  */
   const SIGNALING_SERVER = location.protocol === 'https:'
     ? 'wss://' + location.host
     : 'ws://' + location.host;
