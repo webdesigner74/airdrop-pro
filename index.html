@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080b14">
-<title>AirDrop Pro — Secure File Transfer</title>
+<title>AirDrop Pro — Express Relay</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
@@ -73,13 +73,6 @@ nav {
   box-shadow:0 5px 25px #6c73ff45;
   flex-shrink:0;
 }
-.nav-right {
-  display:flex;
-  align-items:center;
-  gap:22px;
-  color:#b5bfd5;
-  font-size:13px;
-}
 .secure-label {
   display:flex;
   align-items:center;
@@ -88,17 +81,17 @@ nav {
   border:1px solid var(--line);
   border-radius:30px;
   background:#ffffff05;
+  font-size:12px;
 }
 .dot {
   width:7px;
   height:7px;
   display:inline-block;
-  background:var(--green);
+  background:#77839c;
   border-radius:50%;
-  box-shadow:0 0 12px #5ce1b688;
   flex-shrink:0;
 }
-.hero { text-align:center;padding:50px 0 30px; }
+.hero { text-align:center;padding:45px 0 25px; }
 .eyebrow {
   display:inline-flex;
   align-items:center;
@@ -113,7 +106,7 @@ nav {
   letter-spacing:1.1px;
 }
 .hero h1 {
-  margin:20px 0 10px;
+  margin:18px 0 10px;
   font:700 clamp(32px,5vw,55px)/1.08 "Space Grotesk",sans-serif;
   letter-spacing:-2px;
 }
@@ -133,7 +126,7 @@ nav {
 .app-grid {
   display:grid;
   grid-template-columns:1fr;
-  max-width:600px;
+  max-width:550px;
   margin:auto;
   gap:20px;
 }
@@ -180,7 +173,9 @@ input[type="text"]:focus { border-color:#7b8cff9c; }
   font-weight:700;
   font-size:13px;
   cursor:pointer;
+  transition: .2s;
 }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
 .btn-primary {
   color:white;
   background:linear-gradient(110deg,#518dff,#8263f6);
@@ -188,9 +183,12 @@ input[type="text"]:focus { border-color:#7b8cff9c; }
 .btn-secondary {
   color:#dce5ff;
   border:1px solid var(--line);
-  background:#ffffff07;
+  background:linear-gradient(110deg,#3b82f6,#8b5cf6);
   display:inline-block;
   margin-top:10px;
+  text-align: center;
+  padding: 12px 20px;
+  text-decoration: none;
 }
 .connection {
   margin-top:12px;
@@ -203,7 +201,7 @@ input[type="text"]:focus { border-color:#7b8cff9c; }
 .connection.online .dot { background:var(--green); box-shadow:0 0 12px #5ce1b688; }
 .separator { height:1px;background:var(--line);margin:20px 0; }
 .dropzone {
-  min-height:180px;
+  min-height:160px;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -228,7 +226,7 @@ input[type="text"]:focus { border-color:#7b8cff9c; }
 .file-name { font-size:12px;font-weight:700;word-break:break-all; }
 .file-size { color:var(--muted);font-size:11px;margin-top:4px; }
 .progress-track { height:6px;background:#ffffff10;border-radius:20px;margin-top:10px;overflow:hidden; }
-.progress-fill { width:0;height:100%;background:linear-gradient(90deg,#5c9cff,#b18aff); }
+.progress-fill { width:0;height:100%;background:linear-gradient(90deg,#5c9cff,#b18aff); transition: width 0.2s; }
 .progress-label { display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:6px; }
 .hidden { display:none!important; }
 footer { padding:20px 0;color:#68748d;font-size:11px;text-align:center; }
@@ -243,13 +241,13 @@ footer { padding:20px 0;color:#68748d;font-size:11px;text-align:center; }
     <img src="https://i.ibb.co.com/NgQYM55Z/20261027-005010.jpg" alt="Logo" class="custom-logo">
     <div>AirDrop <span>Pro</span></div>
   </a>
-  <div class="secure-label"><span class="dot"></span> Server Relay Mode</div>
+  <div class="secure-label"><span class="dot"></span> 100% Guaranteed Mode</div>
 </nav>
 
 <header class="hero">
-  <div class="eyebrow"><span class="dot"></span> 100% RELIABLE SHARING</div>
+  <div class="eyebrow"><span class="dot"></span> FAST & SECURE RELAY</div>
   <h1>Files move.<br><span class="gradient">Without limits.</span></h1>
-  <p>Connect with a room code and transfer files instantly across any mobile network.</p>
+  <p>Connect with a room code and transfer files instantly across any network.</p>
 </header>
 
 <main class="app-grid">
@@ -263,7 +261,7 @@ footer { padding:20px 0;color:#68748d;font-size:11px;text-align:center; }
   </div>
 
   <div class="room-row">
-    <input id="room-input" type="text" placeholder="Enter room code (e.g. 999)" autocomplete="off">
+    <input id="room-input" type="text" placeholder="Enter room code (e.g. 777)" autocomplete="off">
     <button class="btn btn-primary" id="connect-btn">Join Room</button>
   </div>
 
@@ -277,14 +275,14 @@ footer { padding:20px 0;color:#68748d;font-size:11px;text-align:center; }
   <div class="panel-heading">
     <div>
       <h2>Send / Receive File</h2>
-      <div class="sub">Select a file to send to the connected peer.</div>
+      <div class="sub">Select a file to send.</div>
     </div>
     <div class="step">SHARE</div>
   </div>
 
   <div class="dropzone" id="drop-zone">
     <h3>Click or drop file here</h3>
-    <p>Supports all file types</p>
+    <p>Supports all file types up to 500MB</p>
   </div>
   <input type="file" id="file-input">
 
@@ -305,7 +303,7 @@ footer { padding:20px 0;color:#68748d;font-size:11px;text-align:center; }
 </main>
 
 <footer>
-  <div>© 2026 AirDrop Pro · Secure Server Relay</div>
+  <div>© 2026 AirDrop Pro · HTTP/WS Guaranteed Relay</div>
   <div style="margin-top: 5px;">★ Made By Sadhin ★</div>
 </footer>
 
@@ -329,14 +327,17 @@ const receiveContainer = document.getElementById('receive-container');
 let ws = null;
 let roomCode = '';
 let isConnected = false;
-let incomingFileMeta = null;
-let incomingChunks = [];
-let receivedSize = 0;
 
 function setStatus(msg, online = false) {
   connectionStatus.textContent = msg;
   connection.classList.toggle('online', online);
   isConnected = online;
+}
+
+function formatBytes(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
 }
 
 connectBtn.addEventListener('click', () => {
@@ -350,61 +351,30 @@ connectBtn.addEventListener('click', () => {
 
   const protocol = location.protocol === 'https:' ? 'wss://' : 'ws://';
   ws = new WebSocket(protocol + location.host);
-  ws.binaryType = 'arraybuffer';
 
   ws.onopen = () => {
     ws.send(JSON.stringify({ type: 'join', room: roomCode }));
-    setStatus('Joining room...');
   };
 
-  ws.onmessage = async (event) => {
-    if (event.data instanceof ArrayBuffer) {
-      // রিসিভড ফাইল ডাটা
-      incomingChunks.push(event.data);
-      receivedSize += event.data.byteLength;
-      
-      const pct = Math.min(100, Math.round((receivedSize / incomingFileMeta.size) * 100));
-      progressFill.style.width = pct + '%';
-      progressPercent.textContent = pct + '%';
-      transferStatus.textContent = 'Receiving file...';
-
-      if (receivedSize >= incomingFileMeta.size) {
-        const blob = new Blob(incomingChunks, { type: incomingFileMeta.mime });
-        const url = URL.createObjectURL(blob);
-        
-        const dlLink = document.createElement('a');
-        dlLink.href = url;
-        dlLink.download = incomingFileMeta.name;
-        dlLink.className = 'btn btn-secondary';
-        dlLink.textContent = 'Download ' + incomingFileMeta.name;
-        
-        receiveContainer.appendChild(dlLink);
-        transferStatus.textContent = 'Received successfully!';
-        incomingChunks = [];
-        receivedSize = 0;
-      }
-      return;
-    }
-
+  ws.onmessage = (event) => {
     try {
       const data = JSON.parse(event.data);
+
       if (data.type === 'joined') {
-        setStatus('Room joined. Waiting for partner...', false);
+        setStatus('Room connected: ' + roomCode, true);
       } else if (data.type === 'peer-joined') {
-        setStatus('Partner connected & ready!', true);
-      } else if (data.type === 'peer-left') {
-        setStatus('Partner disconnected.', false);
-      } else if (data.type === 'full') {
-        alert('Room is full!');
-        ws.close();
-      } else if (data.type === 'file-meta') {
-        incomingFileMeta = data;
-        incomingChunks = [];
-        receivedSize = 0;
-        transferCard.classList.remove('hidden');
-        fileName.textContent = data.name;
-        fileSize.textContent = (data.size / (1024*1024)).toFixed(2) + ' MB';
-        transferStatus.textContent = 'Incoming file...';
+        setStatus('Partner connected to room!', true);
+      } else if (data.type === 'file-available') {
+        // রিসিভার ডিভাইসে ইনস্ট্যান্ট ডাউনলোড বাটন দেখানো
+        receiveContainer.innerHTML = '';
+        const item = document.createElement('div');
+        item.className = 'file-card';
+        item.innerHTML = `
+          <div class="file-name">📥 ${data.name}</div>
+          <div class="file-size">${formatBytes(data.size)} · Ready to Download</div>
+          <a href="/api/download/${data.fileId}" class="btn btn-secondary" download="${data.name}">Download File 🚀</a>
+        `;
+        receiveContainer.appendChild(item);
       }
     } catch(e) {}
   };
@@ -415,56 +385,55 @@ connectBtn.addEventListener('click', () => {
 });
 
 dropZone.addEventListener('click', () => fileInput.click());
+
 fileInput.addEventListener('change', () => {
   const file = fileInput.files[0];
   if (!file) return;
 
   if (!isConnected) {
-    alert('Please connect to a room first!');
+    alert('Please join a room code first!');
     fileInput.value = '';
     return;
   }
 
   transferCard.classList.remove('hidden');
   fileName.textContent = file.name;
-  fileSize.textContent = (file.size / (1024*1024)).toFixed(2) + ' MB';
-  transferStatus.textContent = 'Sending file...';
+  fileSize.textContent = formatBytes(file.size);
+  transferStatus.textContent = 'Uploading to relay server...';
+  progressFill.style.width = '0%';
+  progressPercent.textContent = '0%';
 
-  // ফাইলের মেটাডাটা পাঠানো
-  ws.send(JSON.stringify({
-    type: 'file-meta',
-    name: file.name,
-    size: file.size,
-    mime: file.type || 'application/octet-stream'
-  }));
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('room', roomCode);
 
-  // ফাইল টুকরো করে পাঠানো (Chunk size: 64KB)
-  const chunkSize = 64 * 1024;
-  let offset = 0;
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/api/upload', true);
 
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    ws.send(e.target.result);
-    offset += e.target.result.byteLength;
-
-    const pct = Math.min(100, Math.round((offset / file.size) * 100));
-    progressFill.style.width = pct + '%';
-    progressPercent.textContent = pct + '%';
-
-    if (offset < file.size) {
-      readNextChunk();
-    } else {
-      transferStatus.textContent = 'Sent successfully!';
-      fileInput.value = '';
+  xhr.upload.onprogress = (e) => {
+    if (e.lengthComputable) {
+      const pct = Math.round((e.loaded / e.total) * 100);
+      progressFill.style.width = pct + '%';
+      progressPercent.textContent = pct + '%';
     }
   };
 
-  function readNextChunk() {
-    const slice = file.slice(offset, offset + chunkSize);
-    reader.readAsArrayBuffer(slice);
-  }
+  xhr.onload = () => {
+    if (xhr.status === 200) {
+      transferStatus.textContent = 'Sent! Partner can download now.';
+      fileInput.value = '';
+    } else {
+      transferStatus.textContent = 'Upload failed.';
+      alert('Upload failed. Try again.');
+    }
+  };
 
-  readNextChunk();
+  xhr.onerror = () => {
+    transferStatus.textContent = 'Upload error.';
+    alert('Network error occurred.');
+  };
+
+  xhr.send(formData);
 });
 </script>
 </body>
