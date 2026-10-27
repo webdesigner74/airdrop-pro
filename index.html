@@ -187,8 +187,9 @@ input[type="text"]:focus { border-color:#7b8cff9c; }
   display:inline-block;
   margin-top:10px;
   text-align: center;
-  padding: 12px 20px;
+  padding: 10px 16px;
   text-decoration: none;
+  font-size: 12px;
 }
 .connection {
   margin-top:12px;
@@ -226,7 +227,7 @@ input[type="text"]:focus { border-color:#7b8cff9c; }
 .file-name { font-size:12px;font-weight:700;word-break:break-all; }
 .file-size { color:var(--muted);font-size:11px;margin-top:4px; }
 .progress-track { height:6px;background:#ffffff10;border-radius:20px;margin-top:10px;overflow:hidden; }
-.progress-fill { width:0;height:100%;background:linear-gradient(90deg,#5c9cff,#b18aff); transition: width 0.2s; }
+.progress-fill { width:0;height:100%;background:linear-gradient(90deg,#5c9cff,#b18aff); transition: width 0.1s; }
 .progress-label { display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:6px; }
 .hidden { display:none!important; }
 footer { padding:20px 0;color:#68748d;font-size:11px;text-align:center; }
@@ -241,13 +242,13 @@ footer { padding:20px 0;color:#68748d;font-size:11px;text-align:center; }
     <img src="https://i.ibb.co.com/NgQYM55Z/20261027-005010.jpg" alt="Logo" class="custom-logo">
     <div>AirDrop <span>Pro</span></div>
   </a>
-  <div class="secure-label"><span class="dot"></span> 100% Guaranteed Mode</div>
+  <div class="secure-label"><span class="dot"></span> Unlimited Multi-File Mode</div>
 </nav>
 
 <header class="hero">
   <div class="eyebrow"><span class="dot"></span> FAST & SECURE RELAY</div>
   <h1>Files move.<br><span class="gradient">Without limits.</span></h1>
-  <p>Connect with a room code and transfer files instantly across any network.</p>
+  <p>Connect with a room code and transfer multiple photos or videos instantly across any network.</p>
 </header>
 
 <main class="app-grid">
@@ -274,36 +275,25 @@ footer { padding:20px 0;color:#68748d;font-size:11px;text-align:center; }
 
   <div class="panel-heading">
     <div>
-      <h2>Send / Receive File</h2>
-      <div class="sub">Select a file to send.</div>
+      <h2>Send / Receive Files</h2>
+      <div class="sub">Select multiple photos or videos to send.</div>
     </div>
     <div class="step">SHARE</div>
   </div>
 
   <div class="dropzone" id="drop-zone">
-    <h3>Click or drop file here</h3>
-    <p>Supports all file types up to 500MB</p>
+    <h3>Click or drop files here</h3>
+    <p>Multiple photos &amp; videos supported (Any size)</p>
   </div>
-  <input type="file" id="file-input">
+  <input type="file" id="file-input" multiple>
 
-  <div id="transfer-card" class="file-card hidden">
-    <div class="file-name" id="file-name">file.zip</div>
-    <div class="file-size" id="file-size">0 MB</div>
-    <div class="progress-track">
-      <div class="progress-fill" id="progress-fill"></div>
-    </div>
-    <div class="progress-label">
-      <span id="transfer-status">Ready</span>
-      <span id="progress-percent">0%</span>
-    </div>
-  </div>
-
+  <div id="upload-list"></div>
   <div id="receive-container"></div>
 </section>
 </main>
 
 <footer>
-  <div>© 2026 AirDrop Pro · HTTP/WS Guaranteed Relay</div>
+  <div>© 2026 AirDrop Pro · Multiple Media Relay</div>
   <div style="margin-top: 5px;">★ Made By Sadhin ★</div>
 </footer>
 
@@ -316,12 +306,7 @@ const connection = document.getElementById('connection');
 const connectionStatus = document.getElementById('connection-status');
 const dropZone = document.getElementById('drop-zone');
 const fileInput = document.getElementById('file-input');
-const transferCard = document.getElementById('transfer-card');
-const fileName = document.getElementById('file-name');
-const fileSize = document.getElementById('file-size');
-const transferStatus = document.getElementById('transfer-status');
-const progressFill = document.getElementById('progress-fill');
-const progressPercent = document.getElementById('progress-percent');
+const uploadList = document.getElementById('upload-list');
 const receiveContainer = document.getElementById('receive-container');
 
 let ws = null;
@@ -365,8 +350,6 @@ connectBtn.addEventListener('click', () => {
       } else if (data.type === 'peer-joined') {
         setStatus('Partner connected to room!', true);
       } else if (data.type === 'file-available') {
-        // রিসিভার ডিভাইসে ইনস্ট্যান্ট ডাউনলোড বাটন দেখানো
-        receiveContainer.innerHTML = '';
         const item = document.createElement('div');
         item.className = 'file-card';
         item.innerHTML = `
@@ -374,7 +357,7 @@ connectBtn.addEventListener('click', () => {
           <div class="file-size">${formatBytes(data.size)} · Ready to Download</div>
           <a href="/api/download/${data.fileId}" class="btn btn-secondary" download="${data.name}">Download File 🚀</a>
         `;
-        receiveContainer.appendChild(item);
+        receiveContainer.prepend(item);
       }
     } catch(e) {}
   };
@@ -387,8 +370,8 @@ connectBtn.addEventListener('click', () => {
 dropZone.addEventListener('click', () => fileInput.click());
 
 fileInput.addEventListener('change', () => {
-  const file = fileInput.files[0];
-  if (!file) return;
+  const files = fileInput.files;
+  if (!files || files.length === 0) return;
 
   if (!isConnected) {
     alert('Please join a room code first!');
@@ -396,44 +379,59 @@ fileInput.addEventListener('change', () => {
     return;
   }
 
-  transferCard.classList.remove('hidden');
-  fileName.textContent = file.name;
-  fileSize.textContent = formatBytes(file.size);
-  transferStatus.textContent = 'Uploading to relay server...';
-  progressFill.style.width = '0%';
-  progressPercent.textContent = '0%';
+  // Loop through all selected files (Multiple photos/videos support)
+  Array.from(files).forEach(file => {
+    const card = document.createElement('div');
+    card.className = 'file-card';
+    card.innerHTML = `
+      <div class="file-name">${file.name}</div>
+      <div class="file-size">${formatBytes(file.size)}</div>
+      <div class="progress-track">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="progress-label">
+        <span class="transfer-status">Uploading...</span>
+        <span class="progress-percent">0%</span>
+      </div>
+    `;
+    uploadList.prepend(card);
 
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('room', roomCode);
+    const fill = card.querySelector('.progress-fill');
+    const statusText = card.querySelector('.transfer-status');
+    const percentText = card.querySelector('.progress-percent');
 
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', '/api/upload', true);
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('room', roomCode);
 
-  xhr.upload.onprogress = (e) => {
-    if (e.lengthComputable) {
-      const pct = Math.round((e.loaded / e.total) * 100);
-      progressFill.style.width = pct + '%';
-      progressPercent.textContent = pct + '%';
-    }
-  };
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/api/upload', true);
 
-  xhr.onload = () => {
-    if (xhr.status === 200) {
-      transferStatus.textContent = 'Sent! Partner can download now.';
-      fileInput.value = '';
-    } else {
-      transferStatus.textContent = 'Upload failed.';
-      alert('Upload failed. Try again.');
-    }
-  };
+    xhr.upload.onprogress = (e) => {
+      if (e.lengthComputable) {
+        const pct = Math.round((e.loaded / e.total) * 100);
+        fill.style.width = pct + '%';
+        percentText.textContent = pct + '%';
+      }
+    };
 
-  xhr.onerror = () => {
-    transferStatus.textContent = 'Upload error.';
-    alert('Network error occurred.');
-  };
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        statusText.textContent = 'Sent successfully!';
+        fill.style.background = 'linear-gradient(90deg, #22c55e, #10b981)';
+      } else {
+        statusText.textContent = 'Upload failed.';
+      }
+    };
 
-  xhr.send(formData);
+    xhr.onerror = () => {
+      statusText.textContent = 'Network error.';
+    };
+
+    xhr.send(formData);
+  });
+
+  fileInput.value = '';
 });
 </script>
 </body>
